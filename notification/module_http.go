@@ -3,6 +3,7 @@ package notification
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/profitclicks/vitlogs/tools"
 
 	"net/http"
 	"os"
@@ -76,7 +77,7 @@ func (ms *ModuleHttp) Init() (err error) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		if err := json.NewEncoder(w).Encode(data); err != nil {
-			SendByService("default", fmt.Sprintf("%s - %s", ms.Name, err.Error()), tools.PriorityHigh)
+			SendByService("default", fmt.Sprintf("%s - %s", ms.Name, err.Error()),  tools.PriorityHigh)
 		}
 	}))
 	http.Handle("/vitlog/log", HttpTemplate(func(w http.ResponseWriter, r *http.Request) {

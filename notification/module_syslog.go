@@ -2,6 +2,7 @@ package notification
 
 import (
 	"fmt"
+	"github.com/profitclicks/vitlogs/tools"
 
 	"log/syslog"
 	"os"
