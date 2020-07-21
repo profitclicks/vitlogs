@@ -1,4 +1,4 @@
-package vitlog
+package vitlogs
 
 import (
 	"fmt"

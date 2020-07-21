@@ -1,4 +1,4 @@
-package vitlog
+package vitlogs
 
 import (
 	"github.com/profitclicks/vitlogs/notification"
