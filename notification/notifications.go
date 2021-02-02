@@ -8,9 +8,9 @@ import (
 var modules map[string]INotification
 
 type Message struct {
-	Data string
+	Data     string
 	Priority int
-	Date time.Time
+	Date     time.Time
 }
 
 type Module struct {
@@ -19,6 +19,7 @@ type Module struct {
 	TimerChan   chan int
 	Priority    int
 }
+
 func (ms *Module) Send(message string, priority int) {
 	if ms.Priority > priority {
 		return
@@ -26,7 +27,7 @@ func (ms *Module) Send(message string, priority int) {
 	ms.MessageChan <- Message{
 		Data:     message,
 		Priority: priority,
-		Date: time.Now(),
+		Date:     time.Now(),
 	}
 }
 
@@ -45,28 +46,28 @@ func Notifications(body string, priority int) {
 		module.Send(body, priority)
 	}
 }
-func SendByService(name string,body string, priority int) {
-	if module, ok := modules[name]; ok{
+func SendByService(name string, body string, priority int) {
+	if module, ok := modules[name]; ok {
 		module.Send(body, priority)
 	}
 }
 
-
 func InitNotifications() error {
-	fmt.Println("==========|notification|=========")
+	//fmt.Println("==========|notification|=========")
 	for name, module := range modules {
-		fmt.Printf("notification module %s init\n", name)
+		//fmt.Printf("notification module %s init\n", name)
 		if err := module.Init(); err != nil {
-			fmt.Println(err.Error())
+			fmt.Println(name, err.Error())
 			return err
 		}
 	}
 	return nil
 }
+
 // TODO хрень но лучше не придумал
 func AddModuleNotifications(module INotification) {
 	if modules == nil {
-		modules = make( map[string]INotification)
+		modules = make(map[string]INotification)
 	}
 	modules[module.GetName()] = module
 }
