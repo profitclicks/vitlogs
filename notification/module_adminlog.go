@@ -44,7 +44,7 @@ func (ms *ModuleAdminLog) add(message Message) {
 }
 func (ms *ModuleAdminLog) send() {
 	if len(ms.Items) > 0 {
-		fmt.Println(strings.Join(ms.Items, "\n"))
+		fmt.Println(strings.Join(ms.Items, "<eof>\n"))
 		ms.Items = nil
 	}
 	return
