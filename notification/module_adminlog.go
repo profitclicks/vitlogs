@@ -39,12 +39,12 @@ func (ms *ModuleAdminLog) Init() (err error) {
 }
 func (ms *ModuleAdminLog) add(message Message) {
 	date := time.Now()
-	ms.Items = append(ms.Items, fmt.Sprintf("%s <%s> %s", date.Format("2006.01.02 15:04:05"), tools.GetInfo(message.Priority), message.Data))
+	ms.Items = append(ms.Items, fmt.Sprintf("%s <%s> %s<eof>", date.Format("2006.01.02 15:04:05"), tools.GetInfo(message.Priority), message.Data))
 	return
 }
 func (ms *ModuleAdminLog) send() {
 	if len(ms.Items) > 0 {
-		fmt.Println(strings.Join(ms.Items, "<eof>\n"))
+		fmt.Println(strings.Join(ms.Items, "\n"))
 		ms.Items = nil
 	}
 	return
